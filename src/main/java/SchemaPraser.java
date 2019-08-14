@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +31,9 @@ public class SchemaPraser {
      */
     public List<Schema> parseToList(String schema) {
 
-        String[] split = schema.split(",");
-
-        return Arrays.asList(schema.split(","))
+        return Arrays.asList(StringUtils.split(schema, ","))
                 .stream()
                 .map(schemaStr -> parseSchemaStr(schema)).collect(Collectors.toList());
-
     }
 
     private Schema parseSchemaStr(String schemaStr) {
