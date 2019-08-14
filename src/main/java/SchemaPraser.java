@@ -36,7 +36,7 @@ public class SchemaPraser {
                 .map(schemaStr -> parseSchemaStr(schema)).collect(Collectors.toList());
     }
 
-    private Schema parseSchemaStr(String schemaStr) {
+    public Schema parseSchemaStr(String schemaStr) {
 
         String[] array = schemaStr.split(":");
         String name = array[0];
@@ -51,11 +51,20 @@ public class SchemaPraser {
         return schema;
     }
 
-    private Class getType(String type) {
-        return null;
+    public Class getType(String type) {
+        switch (type) {
+            case "bool":
+                return Boolean.class;
+            case "int":
+                return Integer.class;
+            case "string":
+                return String.class;
+            default:
+                throw new RuntimeException("未能解析的类型: " + type);
+        }
     }
 
-    private Object getDefaultValue(String defaultValue) {
+    public Object getDefaultValue(String defaultValue) {
         return null;
     }
 

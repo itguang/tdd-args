@@ -2,8 +2,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
 /**
  * @author guang
  * @since 2019-08-14 19:23
@@ -12,19 +10,33 @@ public class SchemaPraserTest {
 
     String schema = "-l:bool:false,-p:int:0,-d:string:''";
     private SchemaPraser schemaPraser;
-    private Map<String, Schema> parseResult;
 
     @Before
     public void before() {
         schemaPraser = new SchemaPraser();
-        parseResult = schemaPraser.parseToMap(schema);
     }
 
     @Test
-    public void test_parse() {
-        Schema schema = parseResult.get("l");
-        Assert.assertTrue(schema.getName().equals("l"));
+    public void test_getType_bool() {
+        Class aClass = schemaPraser.getType("bool");
+        Assert.assertEquals(aClass, Boolean.class);
+    }
 
+    @Test
+    public void test_getType_int() {
+        Class aClass = schemaPraser.getType("int");
+        Assert.assertEquals(aClass, Integer.class);
+    }
+
+    @Test
+    public void test_getType_string() {
+        Class aClass = schemaPraser.getType("string");
+        Assert.assertEquals(aClass, String.class);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void test_getType_unknow() {
+        schemaPraser.getType("unkonw");
     }
 
 }
