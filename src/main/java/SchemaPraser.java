@@ -19,7 +19,8 @@ public class SchemaPraser {
      * @return Map, key 为 Schema.name , value 为 Schema
      */
     public Map<String, Schema> parseToMap(String schema) {
-        return parseToList(schema).stream()
+        List<Schema> schemas = parseToList(schema);
+        return schemas.stream()
                 .collect(Collectors.toMap(Schema::getName, Function.identity()));
     }
 
@@ -33,7 +34,7 @@ public class SchemaPraser {
 
         return Arrays.asList(StringUtils.split(schema, ","))
                 .stream()
-                .map(schemaStr -> parseSchemaStr(schema)).collect(Collectors.toList());
+                .map(schemaStr -> parseSchemaStr(schemaStr)).collect(Collectors.toList());
     }
 
     public Schema parseSchemaStr(String schemaStr) {
@@ -44,9 +45,9 @@ public class SchemaPraser {
         String defaultValue = array[2];
 
         Schema schema = new Schema();
-        schema.setName(name);
+        schema.setName(name.replace("-", ""));
         schema.setType(getType(type));
-        schema.setDefaultValue(getDefaultValue(defaultValue));
+        schema.setDefaultValue(getDefaultValueByType(type, defaultValue));
 
         return schema;
     }
@@ -64,8 +65,17 @@ public class SchemaPraser {
         }
     }
 
-    public Object getDefaultValue(String defaultValue) {
-        return null;
+    public Object getDefaultValueByType(String type, String defaultValue) {
+        switch (type) {
+            case "bool":
+                return new Boolean(defaultValue);
+            case "int":
+                return Integer.valueOf(defaultValue);
+            case "string":
+                return "";
+            default:
+                throw new RuntimeException("未能解析的类型: " + type);
+        }
     }
 
 }
