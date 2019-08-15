@@ -47,7 +47,7 @@ public class SchemaPraser {
         Schema schema = new Schema();
         schema.setName(name.replace("-", ""));
         schema.setType(getType(type));
-        schema.setDefaultValue(getDefaultValueByType(type, defaultValue));
+        schema.setDefaultValue(castDefaultValueByType(type, defaultValue));
 
         return schema;
     }
@@ -65,7 +65,7 @@ public class SchemaPraser {
         }
     }
 
-    public Object getDefaultValueByType(String type, String defaultValue) {
+    public Object castDefaultValueByType(String type, String defaultValue) {
         switch (type) {
             case "bool":
                 return new Boolean(defaultValue);

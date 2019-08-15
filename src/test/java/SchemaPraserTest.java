@@ -63,19 +63,19 @@ public class SchemaPraserTest {
 
     @Test
     public void test_getDefaultValueByType_bool_false() {
-        Boolean l = (Boolean) schemaPraser.getDefaultValueByType("bool", "false");
+        Boolean l = (Boolean) schemaPraser.castDefaultValueByType("bool", "false");
         Assert.assertTrue(!l);
     }
 
     @Test
     public void test_getDefaultValueByType_int_0() {
-        Integer p = (Integer) schemaPraser.getDefaultValueByType("int", "0");
+        Integer p = (Integer) schemaPraser.castDefaultValueByType("int", "0");
         Assert.assertEquals(p, new Integer(0));
     }
 
     @Test
     public void test_getDefaultValueByType_string_() {
-        String d = (String) schemaPraser.getDefaultValueByType("string", "");
+        String d = (String) schemaPraser.castDefaultValueByType("string", "");
         Assert.assertEquals(d, "");
     }
 
