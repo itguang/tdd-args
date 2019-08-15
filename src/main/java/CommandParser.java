@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * @author guang
  * @since 2019-08-14 18:58
  */
-public class CommandParser {
+public class CommandParser extends Command {
 
     private SchemaPraser schemaPraser;
 

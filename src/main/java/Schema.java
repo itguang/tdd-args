@@ -8,15 +8,6 @@ public class Schema {
     private Class type;
     private Object defaultValue;
 
-    public Schema() {
-    }
-
-    public Schema(String name, Class type, Object defaultValue) {
-        this.name = name;
-        this.type = type;
-        this.defaultValue = defaultValue;
-    }
-
     public String getName() {
         return name;
     }

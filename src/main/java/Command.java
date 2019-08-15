@@ -6,14 +6,6 @@ public class Command {
     private String name;
     private Object value;
 
-    public Command() {
-    }
-
-    public Command(String name, Object value) {
-        this.name = name;
-        this.value = value;
-    }
-
     public String getName() {
         return name;
     }
